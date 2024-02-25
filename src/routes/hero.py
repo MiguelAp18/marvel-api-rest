@@ -37,10 +37,10 @@ def getHero(id):
             'message': str(Exception(ex))
         }), 500
     
-@main.route('/add')
+@main.route('/add', methods=['POST'])
 def addHero():
-    try:
-        
+    try:    
+
         heroes_list = heroesData()
 
         hero = ''

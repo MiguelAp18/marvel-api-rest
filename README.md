@@ -1,5 +1,5 @@
 ## About The Project
-<p>The purpose of this application is to create a backend that consumes the Marvel Official API to get all the heroes. Once filtering the data is stored in a database and then perform read, update or delete operations. The app was developed using Flask and PostgreSQL</p>
+<p>The purpose of this application is to create a backend that consumes the Marvel Official API to get all the heroes data. Once filtering the data is stored in a database and then perform read, update or delete operations. The app was developed using Flask and PostgreSQL</p>
 
 ## Installation
 First, you need to download the project and install or simply clone it.

@@ -41,25 +41,17 @@ def getHero(id):
 def addHero():
     try:    
 
-        heroes_list = heroesData()
+        id = uuid.uuid4()
+        name = request.json['name']
+        description = request.json['description']
+        comics_available = int(request.json['comics_available'])
+        series_available = int(request.json['series_available'])
 
-        hero = ''
-        id = ''
-        affected_rows = 0
-
-        for data in heroes_list:
-
-            id = uuid.uuid4()
-            name = data['name']
-            description = data['description']
-            comics_available = int(data['comics_available'])
-            series_available = int(data['series_available'])
-
-            hero = Hero(str(id), name, description, comics_available, series_available)          
-            affected_rows += hero_model.add_hero(hero)
+        hero = Hero(str(id), name, description, comics_available, series_available)          
+        affected_rows = hero_model.add_hero(hero)
         
         if affected_rows != 0:
-            return jsonify({'records inserted': affected_rows})
+            return jsonify({'record inserted': affected_rows})
         else:
             return jsonify({
                 'message': 'Error on insert'
@@ -107,6 +99,39 @@ def deleteHero(id):
             return jsonify({
                 'message': 'Record not found'
             }), 404
+        
+    except Exception as ex:
+        return jsonify({
+            'message': str(Exception(ex))
+        }), 500
+    
+@main.route('/upload', methods=['POST'])
+def uploadHeroes():
+    try:    
+
+        heroes_list = heroesData()
+
+        hero = ''
+        id = ''
+        affected_rows = 0
+
+        for data in heroes_list:
+
+            id = uuid.uuid4()
+            name = data['name']
+            description = data['description']
+            comics_available = int(data['comics_available'])
+            series_available = int(data['series_available'])
+
+            hero = Hero(str(id), name, description, comics_available, series_available)          
+            affected_rows += hero_model.add_hero(hero)
+        
+        if affected_rows != 0:
+            return jsonify({'records uploaded': affected_rows})
+        else:
+            return jsonify({
+                'message': 'Error on insert'
+            }), 500
         
     except Exception as ex:
         return jsonify({
